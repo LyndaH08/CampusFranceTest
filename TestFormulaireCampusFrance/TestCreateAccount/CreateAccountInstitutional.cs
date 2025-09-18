@@ -87,16 +87,16 @@ namespace CampusFrance.test.TestCreateAccount
             Assert.AreEqual("Créer un compte", driver.FindElement(By.Id("edit-submit")).GetAttribute("value"));
 
 
-            // Vérifier que le statut sélectionné est "Etudiant"
+            // Vérifier que le statut sélectionné est "institutionnel"
             Assert.IsTrue(driver.FindElement(By.Id("edit-field-publics-cibles-4")).Selected, "Le bouton 'Institutionnel' n'est pas sélectionné.");
 
-            // Vérifier que le niveau sélectionné est "Licence 1", recupere le text de l'item qui est le text selectionner
+            // Vérifier que le niveau sélectionné est "Entreprise", recupere le text de l'item qui est le text selectionner
             Assert.AreEqual("Entreprise", driver.FindElement(By.CssSelector("#edit-field-type-organisme-wrapper > div > div > div.selectize-input.items.has-options.full.has-items > div")).Text);
         }
 
 
         [Test]
-        public void AccountReseacherUniversity()
+        public void AccountInstitutionalUniversity()
         {
             driver.Navigate().GoToUrl("https://www.campusfrance.org/fr/user/register");
 
@@ -152,10 +152,10 @@ namespace CampusFrance.test.TestCreateAccount
             Assert.AreEqual("Créer un compte", driver.FindElement(By.Id("edit-submit")).GetAttribute("value"));
 
 
-            // Vérifier que le statut sélectionné est "Etudiant"
+            // Vérifier que le statut sélectionné est "institutionnel"
             Assert.IsTrue(driver.FindElement(By.Id("edit-field-publics-cibles-4")).Selected, "Le bouton 'Institutionnel' n'est pas sélectionné.");
 
-            // Vérifier que le niveau sélectionné est "Licence 1", recupere le text de l'item qui est le text selectionner
+            // Vérifier que le niveau sélectionné est "Etablissement-Université-Ecole", recupere le text de l'item qui est le text selectionner
             Assert.AreEqual("Etablissement-Université-Ecole", driver.FindElement(By.CssSelector("#edit-field-type-organisme-wrapper > div > div > div.selectize-input.items.has-options.full.has-items > div")).Text);
 
         }
