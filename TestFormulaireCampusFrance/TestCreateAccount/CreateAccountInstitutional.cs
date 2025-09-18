@@ -87,16 +87,16 @@ namespace CampusFrance.test.TestCreateAccount
             Assert.AreEqual("Créer un compte", driver.FindElement(By.Id("edit-submit")).GetAttribute("value"));
 
 
-            // Vérifier que le statut sélectionné est "institutionnel"
+            // Vérifier que le statut sélectionné est "Etudiant"
             Assert.IsTrue(driver.FindElement(By.Id("edit-field-publics-cibles-4")).Selected, "Le bouton 'Institutionnel' n'est pas sélectionné.");
 
-            // Vérifier que le niveau sélectionné est "Entreprise", recupere le text de l'item qui est le text selectionner
+            // Vérifier que le niveau sélectionné est "Licence 1", recupere le text de l'item qui est le text selectionner
             Assert.AreEqual("Entreprise", driver.FindElement(By.CssSelector("#edit-field-type-organisme-wrapper > div > div > div.selectize-input.items.has-options.full.has-items > div")).Text);
         }
 
 
         [Test]
-        public void AccountInstitutionalUniversity()
+        public void AccountReseacherUniversity()
         {
             driver.Navigate().GoToUrl("https://www.campusfrance.org/fr/user/register");
 
@@ -106,9 +106,14 @@ namespace CampusFrance.test.TestCreateAccount
             driver.FindElement(By.CssSelector("#edit-pass-pass1")).SendKeys(users[5].MotDePasse);
             driver.FindElement(By.CssSelector("#edit-pass-pass2")).SendKeys(users[5].MotDePasse);
 
-
             //Informations personnelles
             driver.FindElement(By.Id("tarteaucitronPersonalize2")).Click(); // Accepter cookies
+
+            // Attendre que le div bloquant des cookies disparaisse
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(By.Id("tarteaucitronPersonalize2")));
+
+            //Cocher la case MR
             driver.FindElement(By.CssSelector("label[for='edit-field-civilite-mr']")).Click();
             driver.FindElement(By.Id("edit-field-nom-0-value")).SendKeys(users[5].Nom);
             driver.FindElement(By.Id("edit-field-prenom-0-value")).SendKeys(users[5].Prenom);
@@ -152,10 +157,10 @@ namespace CampusFrance.test.TestCreateAccount
             Assert.AreEqual("Créer un compte", driver.FindElement(By.Id("edit-submit")).GetAttribute("value"));
 
 
-            // Vérifier que le statut sélectionné est "institutionnel"
+            // Vérifier que le statut sélectionné est "Etudiant"
             Assert.IsTrue(driver.FindElement(By.Id("edit-field-publics-cibles-4")).Selected, "Le bouton 'Institutionnel' n'est pas sélectionné.");
 
-            // Vérifier que le niveau sélectionné est "Etablissement-Université-Ecole", recupere le text de l'item qui est le text selectionner
+            // Vérifier que le niveau sélectionné est "Licence 1", recupere le text de l'item qui est le text selectionner
             Assert.AreEqual("Etablissement-Université-Ecole", driver.FindElement(By.CssSelector("#edit-field-type-organisme-wrapper > div > div > div.selectize-input.items.has-options.full.has-items > div")).Text);
 
         }
