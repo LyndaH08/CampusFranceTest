@@ -29,18 +29,18 @@ pipeline {
                 bat 'dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx"'
             }
         }
-      
-    stage('Publish Test Results') {
-            steps {
-                echo 'Publication des résultats de tests...'
-
-                // Archive les résultats pour qu’ils soient consultables depuis Jenkins
-                archiveArtifacts artifacts: "**/TestResults/*.trx", allowEmptyArchive: true
-
-                // Publie un rapport lisible via le plugin NUnit
-                step([$class: 'NUnitPublisher', testResults: "**/TestResults/*.trx"])
-            }
-        }
 
     }
+
+    post {
+    always {
+        echo 'Archivage et publication des résultats de tests...'
+        
+        // Archive le fichier .trx même si les tests ont échoué
+        archiveArtifacts artifacts: 'TestFormulaireCampusFrance/TestResults/*.trx', allowEmptyArchive: true
+        
+        // Publie le rapport NUnit
+        step([$class: 'NUnitPublisher', testResults: 'TestFormulaireCampusFrance/TestResults/*.trx'])
+    }
+}
 }
