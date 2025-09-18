@@ -29,7 +29,7 @@ pipeline {
                 bat 'dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx"'
             }
         }
-    }  
+      
     stage('Publish Test Results') {
             steps {
                 echo 'Publication des résultats de tests...'
@@ -42,5 +42,5 @@ pipeline {
             }
         }
 
-   
+    }
 }
