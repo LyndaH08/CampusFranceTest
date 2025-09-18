@@ -1,0 +1,22 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Binaries
+**/bin/
+**/obj/
+
+# Logs
+*.log
+
+# Packages NuGet
+*.nupkg
+packages/
+
+# Test results
+TestResults/
+
+# Autres fichiers temporaires
+*.tmp
+*.cache

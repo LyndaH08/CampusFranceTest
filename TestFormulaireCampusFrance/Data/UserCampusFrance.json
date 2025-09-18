@@ -1,0 +1,125 @@
+[
+  {
+    "AdresseMail": "Sam@gmail.com",
+    "MotDePasse": "01234567NB",
+    "Civilité": "mr",
+    "Nom": "Franck",
+    "Prenom": "Sam",
+    "PaysResidence": "France",
+    "PaysNationalite": "Francaise",
+    "Adresse": {
+      "CodePostale": "75006",
+      "Ville": "Paris"
+    },
+    "Telephone": "0987898767",
+    "Statut": "Etudiant",
+    "Domaine": "Sport",
+    "Niveau": "Licence 1",
+    "Fonction": null,
+    "TypeOrganisme": null,
+    "NomOrganisme": null
+  },
+
+  {
+    "AdresseMail": "Linda@gmail.com",
+    "MotDePasse": "01234567NB",
+    "Civilité": "mme",
+    "Nom": "Hache",
+    "Prenom": "Linda",
+    "PaysResidence": "Algerie",
+    "PaysNationalite": "Algerienne",
+    "Adresse": {
+      "CodePostale": "60000",
+      "Ville": "Bejaia"
+    },
+    "Telephone": "0987898767",
+    "Statut": "Etudiant",
+    "Domaine": "Biologie",
+    "Niveau": "Doctorat / PhD",
+    "Fonction": null,
+    "TypeOrganisme": null,
+    "NomOrganisme": null
+  },
+  {
+    "AdresseMail": "Sam@gmail.com",
+    "MotDePasse": "01234567NB",
+    "Civilité": "mr",
+    "Nom": "Franck",
+    "Prenom": "Sam",
+    "PaysResidence": "France",
+    "PaysNationalite": "Francaise",
+    "Adresse": {
+      "CodePostale": "75006",
+      "Ville": "Paris"
+    },
+    "Telephone": "0987898767",
+    "Statut": "Chercheur",
+    "Domaine": "Sport",
+    "Niveau": "Licence 2",
+    "Fonction": null,
+    "TypeOrganisme": null,
+    "NomOrganisme": null
+  },
+  {
+    "AdresseMail": "Sam@gmail.com",
+    "MotDePasse": "01234567NB",
+    "Civilité": "mr",
+    "Nom": "Franck",
+    "Prenom": "Sam",
+    "PaysResidence": "France",
+    "PaysNationalite": "Francaise",
+    "Adresse": {
+      "CodePostale": "75006",
+      "Ville": "Paris"
+    },
+    "Telephone": "0987898767",
+    "Statut": "Chercheur",
+    "Domaine": "Biologie",
+    "Niveau": "Doctorat / PhD",
+    "Fonction": null,
+    "TypeOrganisme": null,
+    "NomOrganisme": null
+  },
+  {
+    "AdresseMail": "Sam@gmail.com",
+    "MotDePasse": "01234567NB",
+    "Civilité": "mr",
+    "Nom": "Franck",
+    "Prenom": "Sam",
+    "PaysResidence": "France",
+    "PaysNationalite": "Francaise",
+    "Adresse": {
+      "CodePostale": "75006",
+      "Ville": "Paris"
+    },
+    "Telephone": "0987898767",
+    "Statut": "Institutionnel",
+    "Domaine": null,
+    "Niveau": null,
+    "Fonction": "Développement de solutions logicielles",
+    "TypeOrganisme": "Entreprise",
+    "NomOrganisme": "Microsoft"
+
+  },
+  {
+    "AdresseMail": "Sam@gmail.com",
+    "MotDePasse": "01234567NB",
+    "Civilité": "mr",
+    "Nom": "Franck",
+    "Prenom": "Sam",
+    "PaysResidence": "France",
+    "PaysNationalite": "Francaise",
+    "Adresse": {
+      "CodePostale": "75006",
+      "Ville": "Paris"
+    },
+    "Telephone": "0987898767",
+    "Statut": "Institutionnel",
+    "Domaine": null,
+    "Niveau": null,
+    "Fonction": "Délivrance de diplômes",
+    "TypeOrganisme": "Etablissement-Université-Ecole",
+    "NomOrganisme": "Établissement d’enseignement supérieur"
+  }
+]
+
