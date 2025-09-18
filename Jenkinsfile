@@ -11,8 +11,8 @@ pipeline {
 
         stage('Restore Packages') {
             steps {
-                // Restaurer les packages NuGet si nécessaire
-                bat 'dotnet restore TestFormulaireCampusFrance/TestFormulaireCampusFrance.sln'
+                // Restaurer les packages NuGet (Télécharger et préparer toutes les dépendances NuGet du projet)
+                bat 'dotnet restore TestFormulaireCampusFrance.sln'
             }
         }
 
