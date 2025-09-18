@@ -19,14 +19,14 @@ pipeline {
         stage('Build') {
             steps {
                 // Compiler le projet
-                bat 'dotnet build TestFormulaireCampusFrance/TestFormulaireCampusFrance.sln --configuration Debug'
+                bat 'dotnet build TestFormulaireCampusFrance.sln --configuration Debug'
             }
         }
 
         stage('Test') {
             steps {
                 // Lancer les tests NUnit
-                bat 'dotnet test TestFormulaireCampusFrance/TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx"'
+                bat 'dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx"'
             }
         }
     }
