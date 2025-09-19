@@ -41,10 +41,13 @@ namespace CampusFrance.test.TestCreateAccount
             driver.FindElement(By.CssSelector("#edit-pass-pass1")).SendKeys(users[2].MotDePasse);
             driver.FindElement(By.CssSelector("#edit-pass-pass2")).SendKeys(users[2].MotDePasse);
 
-
             //Informations personnelles
             driver.FindElement(By.Id("tarteaucitronPersonalize2")).Click(); // Accepter cookies
-            driver.FindElement(By.CssSelector("label[for='edit-field-civilite-mr']")).Click();
+
+          ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true); arguments[0].click();",
+                      driver.FindElement(By.Id("edit-field-civilite-mr")));
+            
+
             driver.FindElement(By.Id("edit-field-nom-0-value")).SendKeys(users[2].Nom);
             driver.FindElement(By.Id("edit-field-prenom-0-value")).SendKeys(users[2].Prenom);
 
@@ -107,7 +110,8 @@ namespace CampusFrance.test.TestCreateAccount
 
             //Informations personnelles
             driver.FindElement(By.Id("tarteaucitronPersonalize2")).Click(); // Accepter cookies
-            driver.FindElement(By.CssSelector("label[for='edit-field-civilite-mr']")).Click();
+            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true); arguments[0].click();",
+                    driver.FindElement(By.Id("edit-field-civilite-mr")));
             driver.FindElement(By.Id("edit-field-nom-0-value")).SendKeys(users[3].Nom);
             driver.FindElement(By.Id("edit-field-prenom-0-value")).SendKeys(users[3].Prenom);
 

@@ -44,8 +44,9 @@ namespace CampusFrance.test.TestCreateAccount
 
 
             //Informations personnelles
-            driver.FindElement(By.Id("tarteaucitronPersonalize2")).Click(); // Accepter cookies
-            driver.FindElement(By.CssSelector("label[for='edit-field-civilite-mr']")).Click();
+            driver.FindElement(By.Id("tarteaucitronPersonalize2")).Click(); // Accepter cookies                                                              
+            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true); arguments[0].click();",
+                        driver.FindElement(By.Id("edit-field-civilite-mr")));
             driver.FindElement(By.Id("edit-field-nom-0-value")).SendKeys(users[0].Nom);
             driver.FindElement(By.Id("edit-field-prenom-0-value")).SendKeys(users[0].Prenom);
 
@@ -108,7 +109,9 @@ namespace CampusFrance.test.TestCreateAccount
 
             //Informations personnelles
             driver.FindElement(By.Id("tarteaucitronPersonalize2")).Click(); // Accepter cookies
-            driver.FindElement(By.CssSelector("label[for='edit-field-civilite-mme']")).Click();
+            //Scroller puis Cocher la case MR
+            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true); arguments[0].click();",
+                        driver.FindElement(By.Id("edit-field-civilite-mr")));
             driver.FindElement(By.Id("edit-field-nom-0-value")).SendKeys(users[1].Nom);
             driver.FindElement(By.Id("edit-field-prenom-0-value")).SendKeys(users[1].Prenom);
 

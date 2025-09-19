@@ -44,7 +44,8 @@ namespace CampusFrance.test.TestCreateAccount
 
             //Informations personnelles
             driver.FindElement(By.Id("tarteaucitronPersonalize2")).Click(); // Accepter cookies
-            driver.FindElement(By.CssSelector("label[for='edit-field-civilite-mr']")).Click();
+            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true); arguments[0].click();",
+                       driver.FindElement(By.Id("edit-field-civilite-mr")));
             driver.FindElement(By.Id("edit-field-nom-0-value")).SendKeys(users[4].Nom);
             driver.FindElement(By.Id("edit-field-prenom-0-value")).SendKeys(users[4].Prenom);
 
@@ -96,7 +97,7 @@ namespace CampusFrance.test.TestCreateAccount
 
 
         [Test]
-        public void AccountReseacherUniversity()
+        public void AccountInstitutionalUniversity()
         {
             driver.Navigate().GoToUrl("https://www.campusfrance.org/fr/user/register");
 
@@ -109,12 +110,9 @@ namespace CampusFrance.test.TestCreateAccount
             //Informations personnelles
             driver.FindElement(By.Id("tarteaucitronPersonalize2")).Click(); // Accepter cookies
 
-            // Attendre que le div bloquant des cookies disparaisse
-            //WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(By.Id("tarteaucitronPersonalize2")));
-
-            //Cocher la case MR
-            driver.FindElement(By.CssSelector("label[for='edit-field-civilite-mr']")).Click();
+            //Scroller puis Cocher la case MR
+            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true); arguments[0].click();",
+                        driver.FindElement(By.Id("edit-field-civilite-mr")));
             driver.FindElement(By.Id("edit-field-nom-0-value")).SendKeys(users[5].Nom);
             driver.FindElement(By.Id("edit-field-prenom-0-value")).SendKeys(users[5].Prenom);
 
