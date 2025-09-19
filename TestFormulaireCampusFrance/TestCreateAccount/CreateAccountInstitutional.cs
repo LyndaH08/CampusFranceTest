@@ -110,8 +110,8 @@ namespace CampusFrance.test.TestCreateAccount
             driver.FindElement(By.Id("tarteaucitronPersonalize2")).Click(); // Accepter cookies
 
             // Attendre que le div bloquant des cookies disparaisse
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(By.Id("tarteaucitronPersonalize2")));
+            //WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(By.Id("tarteaucitronPersonalize2")));
 
             //Cocher la case MR
             driver.FindElement(By.CssSelector("label[for='edit-field-civilite-mr']")).Click();
