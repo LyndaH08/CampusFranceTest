@@ -40,7 +40,11 @@ pipeline {
         archiveArtifacts artifacts: 'TestFormulaireCampusFrance/TestResults/*.trx', allowEmptyArchive: true
         
         // Publie le rapport NUnit
-        step([$class: 'NUnitPublisher', testResults: 'TestFormulaireCampusFrance/TestResults/*.trx'])
+          step([$class: 'NUnitPublisher',
+              testResultsPattern: '**/TestResult.xml',
+              debug: false,
+              keepJUnitReports: true,
+              skipJUnitArchiver: false])
     }
 }
 }
