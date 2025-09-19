@@ -37,11 +37,11 @@ pipeline {
         echo 'Archivage et publication des résultats de tests...'
         
         // Archive le fichier .trx même si les tests ont échoué
-        archiveArtifacts artifacts: 'TestFormulaireCampusFrance/TestResults/*.trx', allowEmptyArchive: true
+        archiveArtifacts artifacts: 'TestFormulaireCampusFrance/TestResults/TestResult.trx', allowEmptyArchive: true
         
         // Publie le rapport NUnit
           step([$class: 'NUnitPublisher',
-              testResultsPattern: '**/TestResult.xml',
+              testResultsPattern: 'TestFormulaireCampusFrance/TestResults/TestResult.trx',
               debug: false,
               keepJUnitReports: true,
               skipJUnitArchiver: false])
