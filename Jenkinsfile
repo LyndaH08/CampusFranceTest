@@ -32,11 +32,13 @@ pipeline {
         }
             stage('Generate HTML Report') {
             steps {
-                // Installer l'outil local si nécessaire
-                bat 'dotnet tool restore'
+                // Installer ReportGenerator 
+                bat 'dotnet tool install -g dotnet-reportgenerator-globaltool || echo "Tool already installed"'
+
 
                 // Générer le rapport HTML à partir du .trx
                 bat 'dotnet reportgenerator -reports:TestFormulaireCampusFrance/TestResults/TestResults.trx -targetdir:TestFormulaireCampusFrance/TestReport -reporttypes:Html'
+           
             }
         }
 
