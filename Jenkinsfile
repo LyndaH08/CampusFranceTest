@@ -27,7 +27,7 @@ pipeline {
             steps {
                 // Lancer les tests NUnit
                // bat 'dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx"'
-bat """dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=TestFormulaireCampusFrance/TestResults/coverage.opencover.xml"""
+bat """dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=TestFormulaireCampusFrance/TestResults/"""
      
             }
         }
