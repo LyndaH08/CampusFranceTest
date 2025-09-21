@@ -11,7 +11,7 @@ pipeline {
 
         stage('Restore Packages') {
             steps {
-                // Restaurer les packages NuGet (Télécharger et préparer toutes les dépendances NuGet du projet)
+                // Restaurer les packages NuGet
                 bat 'dotnet restore TestFormulaireCampusFrance.sln'
             }
         }
@@ -25,46 +25,43 @@ pipeline {
 
         stage('Test') {
             steps {
-                      
-        bat 'if not exist TestFormulaireCampusFrance\\TestResults mkdir TestFormulaireCampusFrance\\TestResults'
+                // Créer le dossier TestResults si nécessaire
+                bat 'if not exist TestFormulaireCampusFrance/TestResults mkdir TestFormulaireCampusFrance/TestResults'
 
-                // Lancer les tests NUnit
-               // bat 'dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx"'
- bat """dotnet test TestFormulaireCampusFrance.sln ^
+                // Lancer les tests NUnit avec couverture
+                bat """dotnet test TestFormulaireCampusFrance.sln ^
     --logger "trx;LogFileName=TestResults.trx" ^
     /p:CollectCoverage=true ^
     /p:CoverletOutputFormat=opencover ^
-    /p:CoverletOutput=TestFormulaireCampusFrance\TestResults\coverage.opencover.xml"""
-     
+    /p:CoverletOutput=TestFormulaireCampusFrance/TestResults/coverage.opencover.xml"""
             }
         }
-            stage('Generate HTML Report') {
-              steps {
-                // Restaurer les outils locaux (reportgenerator) a aprtir du ficher donet-tools.Json
+
+        stage('Generate HTML Report') {
+            steps {
+                // Restaurer les outils locaux (reportgenerator)
                 bat 'dotnet tool restore'
 
-                // Générer le rapport HTML à partir du .trx
-       bat """dotnet tool run reportgenerator ^
-    -reports:TestFormulaireCampusFrance\TestResults\coverage.opencover.xml ^
-    -targetdir:TestFormulaireCampusFrance\TestReport ^
+                // Générer le rapport HTML à partir du fichier de couverture
+                bat """dotnet tool run reportgenerator ^
+    -reports:TestFormulaireCampusFrance/TestResults/coverage.opencover.xml ^
+    -targetdir:TestFormulaireCampusFrance/TestReport ^
     -reporttypes:HtmlSummary"""
-
             }
         }
-
     }
 
     post {
-   always {
+        always {
             echo 'Archivage et publication des résultats MSTest et HTML...'
 
-            // Archive le fichier TRX pour Jenkins
+            // Archiver le fichier TRX
             archiveArtifacts artifacts: 'TestFormulaireCampusFrance/TestResults/TestResults.trx', allowEmptyArchive: true
 
-            // Publier les résultats MSTest dans Jenkins
+            // Publier les résultats MSTest
             mstest testResultsFile: 'TestFormulaireCampusFrance/TestResults/TestResults.trx'
 
-            // Publier le HTML généré pour visualisation
+            // Publier le HTML généré
             publishHTML(target: [
                 reportDir: 'TestFormulaireCampusFrance/TestReport',
                 reportFiles: 'index.html',
@@ -73,5 +70,5 @@ pipeline {
                 alwaysLinkToLastBuild: true
             ])
         }
-}
+    }
 }
