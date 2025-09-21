@@ -25,30 +25,11 @@ pipeline {
 
         stage('Test') {
             steps {
-                // Créer le dossier TestResults si nécessaire
-                bat 'if not exist TestFormulaireCampusFrance/TestResults mkdir TestFormulaireCampusFrance/TestResults'
-
                 // Lancer les tests NUnit avec couverture
-                bat """dotnet test TestFormulaireCampusFrance.sln ^
-    --logger "trx;LogFileName=TestResults.trx" ^
-    /p:CollectCoverage=true ^
-    /p:CoverletOutputFormat=opencover ^
-    /p:CoverletOutput=TestFormulaireCampusFrance\\TestResults\\coverage.opencover"""
+                bat """ dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx" """
             }
         }
 
-        stage('Generate HTML Report') {
-            steps {
-                // Restaurer les outils locaux (reportgenerator)
-                bat 'dotnet tool restore'
-
-                // Générer le rapport HTML à partir du fichier de couverture
-                bat """dotnet tool run reportgenerator ^
-    -reports:TestFormulaireCampusFrance/TestResults/coverage.opencover.xml ^
-    -targetdir:TestFormulaireCampusFrance/TestReport ^
-    -reporttypes:HtmlSummary"""
-            }
-        }
     }
 
     post {
@@ -61,14 +42,6 @@ pipeline {
             // Publier les résultats MSTest
             mstest testResultsFile: 'TestFormulaireCampusFrance/TestResults/TestResults.trx'
 
-            // Publier le HTML généré
-            publishHTML(target: [
-                reportDir: 'TestFormulaireCampusFrance/TestReport',
-                reportFiles: 'index.html',
-                reportName: 'Test Report HTML',
-                keepAll: true,
-                alwaysLinkToLastBuild: true
-            ])
         }
     }
 }
