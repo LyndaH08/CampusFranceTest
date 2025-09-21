@@ -27,10 +27,8 @@ pipeline {
             steps {
                 // Lancer les tests NUnit
                // bat 'dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx"'
-                 bat 'dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-'
-                
-        
+      bat """dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover"""
+     
             }
         }
             stage('Generate HTML Report') {
@@ -39,8 +37,8 @@ pipeline {
                 bat 'dotnet tool restore'
 
                 // Générer le rapport HTML à partir du .trx
-                  bat 'dotnet tool run reportgenerator -reports:TestFormulaireCampusFrance/TestResults/coverage.opencover.xml -targetdir:TestFormulaireCampusFrance/TestReport -reporttypes:HtmlSummary
-'
+       bat """dotnet tool run reportgenerator -reports:TestFormulaireCampusFrance/TestResults/coverage.opencover.xml -targetdir:TestFormulaireCampusFrance/TestReport -reporttypes:HtmlSummary"""
+
             }
         }
 
