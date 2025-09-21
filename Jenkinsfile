@@ -33,7 +33,7 @@ pipeline {
     --logger "trx;LogFileName=TestResults.trx" ^
     /p:CollectCoverage=true ^
     /p:CoverletOutputFormat=opencover ^
-    /p:CoverletOutput=TestFormulaireCampusFrance/TestResults/"""
+    /p:CoverletOutput=TestFormulaireCampusFrance\\TestResults\\coverage.opencover"""
             }
         }
 
