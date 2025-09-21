@@ -26,17 +26,21 @@ pipeline {
         stage('Test') {
             steps {
                 // Lancer les tests NUnit
-                bat 'dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx"'
+               // bat 'dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx"'
+                 bat 'dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+'
+                
         
             }
         }
             stage('Generate HTML Report') {
               steps {
-                // Restaurer les outils locaux (reportgenerator)
+                // Restaurer les outils locaux (reportgenerator) a aprtir du ficher donet-tools.Json
                 bat 'dotnet tool restore'
 
                 // Générer le rapport HTML à partir du .trx
-bat 'dotnet tool run reportgenerator -reports:TestFormulaireCampusFrance/TestResults/TestResults.trx -targetdir:TestFormulaireCampusFrance/TestReport -reporttypes:HtmlSummary'
+                  bat 'dotnet tool run reportgenerator -reports:TestFormulaireCampusFrance/TestResults/coverage.opencover.xml -targetdir:TestFormulaireCampusFrance/TestReport -reporttypes:HtmlSummary
+'
             }
         }
 
