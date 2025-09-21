@@ -26,12 +26,8 @@ pipeline {
         stage('Test') {
             steps {
                 // Lancer les tests NUnit
-                //bat 'dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx"'
-               // bat 'dotnet test TestFormulaireCampusFrance.sln --logger "nunit;LogFileName=TestResults.xml"'
-                // Lancer les tests avec NUnit Console Runner
-               bat '"packages\\NUnit.ConsoleRunner.3.17.0\\tools\\nunit3-console.exe" bin\\Debug\\net8.0\\CampusFrance.test.dll --result=TestResults.xml;format=nunit2'
-
-
+                bat 'dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx"'
+        
             }
         }
 
@@ -41,15 +37,12 @@ pipeline {
     always {
         echo 'Archivage et publication des résultats NUnit...'
         
-        // Archive le fichier NUnit XML
-        archiveArtifacts artifacts: 'TestFormulaireCampusFrance/TestResults.xml', allowEmptyArchive: true
+        // Archive le fichier trx
+        archiveArtifacts artifacts: 'TestFormulaireCampusFrance/TestResults.trx', allowEmptyArchive: true
         
-        // Publie le rapport NUnit
-        step([$class: 'NUnitPublisher',
-              testResultsPattern: 'TestFormulaireCampusFrance/TestResults.xml',
-              debug: false,
-              keepJUnitReports: true,
-              skipJUnitArchiver: false])
+         // Jenkins publie les résultats MSTest (.trx)
+          mstest testResultsFile: 'TestFormulaireCampusFrance/TestResults.trx'
+      
     }
 }
 }
