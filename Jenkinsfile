@@ -29,7 +29,8 @@ pipeline {
                 //bat 'dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx"'
                // bat 'dotnet test TestFormulaireCampusFrance.sln --logger "nunit;LogFileName=TestResults.xml"'
                 // Lancer les tests avec NUnit Console Runner
-        bat 'nunit3-console.exe bin\\Debug\\net8.0\\CampusFrance.test.dll --result=TestResults.xml;format=nunit2'
+               bat '"packages\\NUnit.ConsoleRunner.3.17.0\\tools\\nunit3-console.exe" bin\\Debug\\net8.0\\CampusFrance.test.dll --result=TestResults.xml;format=nunit2'
+
 
             }
         }
