@@ -30,19 +30,36 @@ pipeline {
         
             }
         }
+            stage('Generate HTML Report') {
+            steps {
+                // Installer l'outil local si nécessaire
+                bat 'dotnet tool restore'
+
+                // Générer le rapport HTML à partir du .trx
+                bat 'dotnet reportgenerator -reports:TestFormulaireCampusFrance/TestResults/TestResults.trx -targetdir:TestFormulaireCampusFrance/TestReport -reporttypes:Html'
+            }
+        }
 
     }
 
     post {
-    always {
-        echo 'Archivage et publication des résultats NUnit...'
-        
-        // Archive le fichier trx
-        archiveArtifacts artifacts: 'TestFormulaireCampusFrance/TestResults/TestResults.trx', allowEmptyArchive: true
-        
-         // Jenkins publie les résultats MSTest (.trx)
-          mstest testResultsFile: 'TestFormulaireCampusFrance/TestResults/TestResults.trx'
-      
-    }
+   always {
+            echo 'Archivage et publication des résultats MSTest et HTML...'
+
+            // Archive tout le dossier TestResults (trx + HTML)
+            archiveArtifacts artifacts: 'TestFormulaireCampusFrance/TestResults/**', allowEmptyArchive: true
+
+            // Publier le .trx dans Jenkins (tableau MSTest)
+            mstest testResultsFile: 'TestFormulaireCampusFrance/TestResults/TestResults.trx'
+
+            // Publier le rapport HTML dans Jenkins (lien cliquable)
+            publishHTML(target: [
+                reportDir: 'TestFormulaireCampusFrance/TestResults/TestReport',
+                reportFiles: 'index.html',
+                reportName: 'Test Report HTML',
+                keepAll: true,
+                alwaysLinkToLastBuild: true
+            ])
+        }
 }
 }
