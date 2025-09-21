@@ -38,10 +38,10 @@ pipeline {
         echo 'Archivage et publication des résultats NUnit...'
         
         // Archive le fichier trx
-        archiveArtifacts artifacts: 'TestFormulaireCampusFrance/TestResults.trx', allowEmptyArchive: true
+        archiveArtifacts artifacts: 'TestFormulaireCampusFrance/TestResults/TestResults.trx', allowEmptyArchive: true
         
          // Jenkins publie les résultats MSTest (.trx)
-          mstest testResultsFile: 'TestFormulaireCampusFrance/TestResults.trx'
+          mstest testResultsFile: 'TestFormulaireCampusFrance/TestResults/TestResults.trx'
       
     }
 }
