@@ -36,7 +36,7 @@ pipeline {
                 bat 'dotnet tool restore'
 
                 // Générer le rapport HTML à partir du .trx
-                bat 'dotnet tool run reportgenerator -reports:"TestFormulaireCampusFrance/TestResults/TestResults.trx" -targetdir:"TestFormulaireCampusFrance/TestReport" -reporttypes:Html'
+bat 'dotnet tool run reportgenerator -reports:TestFormulaireCampusFrance/TestResults/TestResults.trx -targetdir:TestFormulaireCampusFrance/TestReport -reporttypes:HtmlSummary'
             }
         }
 
