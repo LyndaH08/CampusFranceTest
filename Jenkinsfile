@@ -31,14 +31,12 @@ pipeline {
             }
         }
             stage('Generate HTML Report') {
-            steps {
-                // Installer ReportGenerator 
-                bat 'dotnet tool install -g dotnet-reportgenerator-globaltool || echo "Tool already installed"'
-
+              steps {
+                // Restaurer les outils locaux (reportgenerator)
+                bat 'dotnet tool restore'
 
                 // Générer le rapport HTML à partir du .trx
-                bat 'dotnet reportgenerator -reports:TestFormulaireCampusFrance/TestResults/TestResults.trx -targetdir:TestFormulaireCampusFrance/TestReport -reporttypes:Html'
-           
+                bat 'dotnet tool run reportgenerator -reports:"TestFormulaireCampusFrance/TestResults/TestResults.trx" -targetdir:"TestFormulaireCampusFrance/TestReport" -reporttypes:Html'
             }
         }
 
@@ -48,15 +46,15 @@ pipeline {
    always {
             echo 'Archivage et publication des résultats MSTest et HTML...'
 
-            // Archive tout le dossier TestResults (trx + HTML)
-            archiveArtifacts artifacts: 'TestFormulaireCampusFrance/TestResults/**', allowEmptyArchive: true
+            // Archive le fichier TRX pour Jenkins
+            archiveArtifacts artifacts: 'TestFormulaireCampusFrance/TestResults/TestResults.trx', allowEmptyArchive: true
 
-            // Publier le .trx dans Jenkins (tableau MSTest)
+            // Publier les résultats MSTest dans Jenkins
             mstest testResultsFile: 'TestFormulaireCampusFrance/TestResults/TestResults.trx'
 
-            // Publier le rapport HTML dans Jenkins (lien cliquable)
+            // Publier le HTML généré pour visualisation
             publishHTML(target: [
-                reportDir: 'TestFormulaireCampusFrance/TestResults/TestReport',
+                reportDir: 'TestFormulaireCampusFrance/TestReport',
                 reportFiles: 'index.html',
                 reportName: 'Test Report HTML',
                 keepAll: true,
