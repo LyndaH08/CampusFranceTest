@@ -27,7 +27,7 @@ pipeline {
             steps {
                 // Lancer les tests NUnit
                 //bat 'dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx"'
-                bat 'dotnet test --logger "trx;LogFileName=test-results.trx" --logger "junit;LogFileName=test-results.xml"'
+                bat 'dotnet test TestFormulaireCampusFrance.sln --logger "trx;LogFileName=TestResults.trx" --logger "junit;LogFileName=TestResults.xml"'
 
             }
         }
@@ -39,11 +39,11 @@ pipeline {
         echo 'Archivage et publication des résultats de tests...'
         
         // Archive le fichier .trx même si les tests ont échoué
-        archiveArtifacts artifacts: 'TestFormulaireCampusFrance/TestResults/test-results.xml', allowEmptyArchive: true
+        archiveArtifacts artifacts: 'TestFormulaireCampusFrance/TestResults/TestResults.xml', allowEmptyArchive: true
         
         // Publie le rapport NUnit
           step([$class: 'NUnitPublisher',
-              testResultsPattern: 'TestFormulaireCampusFrance/TestResults/test-results.xml',
+              testResultsPattern: 'TestFormulaireCampusFrance/TestResults/TestResults.xml',
               debug: false,
               keepJUnitReports: true,
               skipJUnitArchiver: false])
